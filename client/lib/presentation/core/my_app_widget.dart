@@ -5,17 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import '../router/router.dart';
 
 class MyAppWidget extends StatelessWidget {
-  const MyAppWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return _MyAppRouter();
-  }
-}
-
-class _MyAppRouter extends StatelessWidget {
-  _MyAppRouter({Key? key}) : super(key: key);
-
   final _appRouter = AppRouter();
 
   @override
