@@ -12,6 +12,7 @@ analyzer:
     - "**/*.mocks.dart"
     - "**/firebase_options.dart"
     - "lib/generated_plugin_registrant.dart"
+    - "**/*.pbgrpc.dart"
   errors:
     included_file_warning: ignore
     undefined_named_parameter: ignore
