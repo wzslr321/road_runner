@@ -1,6 +1,14 @@
 {
-  "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
-  }
+  "unauthorizedGreeting": "Hello There!",
+  "@unauthorizedGreeting": {
+    "description": "Text displayed on profile page to an unauthorized user"
+  },
+  "unauthorizedFeaturesInfo": "Access more features by logging in.",
+  "@unauthorizedFeaturesInfo": {
+    "description": "Text displayed on profile page to an unauthorized user"
+  },
+  "settingsLogIn": "Log in",
+  "settingsTermsOfService": "Terms of service",
+  "settingsCommunityGuidelines": "Community Guidelines",
+  "settingsPrivacyPolicy": "Privacy Policy"
 }
