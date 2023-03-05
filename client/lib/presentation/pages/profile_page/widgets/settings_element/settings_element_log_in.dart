@@ -13,7 +13,7 @@ class SettingsElementLogIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SettingsElementCore(title: title, onTap: () => print(''));
+    return SettingsElementCore(title: title, onTap: () => {});
   }
 
   @override
