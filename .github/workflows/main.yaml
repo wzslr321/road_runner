@@ -23,6 +23,7 @@ jobs:
           FLUTTER_PUB_CACHE: ${{env.FLUTTER_HOME}}/.pub-cache/bin
         run: |
           flutter pub global activate pubviz
+          echo $?
           export PATH=$PATH:$FLUTTER_DART_HOME
           export PATH=$PATH:$FLUTTER_PUB_CACHE
           pubviz print -d > pubviz.html
