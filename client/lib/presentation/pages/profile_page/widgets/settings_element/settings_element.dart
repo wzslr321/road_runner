@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/extensions.dart';
-import '../../../../core/constants/colors.dart';
 import 'settings_element_core.dart';
 
 class SettingsElement extends StatelessWidget {

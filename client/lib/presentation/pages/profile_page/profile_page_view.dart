@@ -31,15 +31,15 @@ class ProfilePageView extends StatelessWidget {
                       ),
                       SettingsElement(
                         title: context.l10n.settingsCommunityGuidelines,
-                        onTap: () => print('redirect'),
+                        onTap: () => {},
                       ),
                       SettingsElement(
                         title: context.l10n.settingsPrivacyPolicy,
-                        onTap: () => print('redirect'),
+                        onTap: () => {},
                       ),
                       SettingsElement(
                         title: context.l10n.settingsTermsOfService,
-                        onTap: () => print('redirect'),
+                        onTap: () => {},
                       ),
                     ],
                   ),

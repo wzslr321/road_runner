@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
-import '../../../utils/extensions.dart';
 import '../../core/widgets/bottom_navbar/bottom_navbar.dart';
 import 'widgets/ex_widgets.dart';
 
