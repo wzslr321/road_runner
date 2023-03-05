@@ -1,3 +1,9 @@
 {
-  "helloWorld": "Witaj świecie!"
+  "unauthorizedGreeting": "Cześć użytkowniku!",
+  "unauthorizedFeaturesInfo": "Zyskaj dostęp do większej ilości funkcji, logując się!",
+  "settingsLogIn": "Zaloguj się",
+  "settingsTermsOfService": "Zasady użytkowania",
+  "settingsCommunityGuidelines": "Wytyczne społeczności",
+  "settingsPrivacyPolicy": "Polityka prywatności",
+  "searchInputHolder": "Dokąd chcesz się udać?"
 }

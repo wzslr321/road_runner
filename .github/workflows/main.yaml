@@ -1,0 +1,12 @@
+name: main
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
+    with:
+      coverage_excludes: "*.g.dart *.freezed.dart *.gen.dart" # defaults to "" (none)
+      flutter_channel: master
+      flutter_version: 3.9.0-1.0.pre.33
+      working_directory: client
+      min_coverage: 0
