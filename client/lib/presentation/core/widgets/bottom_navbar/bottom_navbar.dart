@@ -40,10 +40,10 @@ class BottomNavBar extends StatelessWidget {
               // TODO: implement listener
             },
             builder: (context, state) {
-              if(state is Started) {
+              if (state is Started) {
                 return const ExtendedSearchElement();
               }
-              if(state is Submitted) {
+              if (state is Submitted) {
                 context.router.push(const SearchResultsRoute());
               }
               return const Row(

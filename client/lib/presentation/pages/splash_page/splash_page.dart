@@ -10,5 +10,3 @@ class SplashPage extends StatelessWidget {
     return const SplashPageView();
   }
 }
-
-
