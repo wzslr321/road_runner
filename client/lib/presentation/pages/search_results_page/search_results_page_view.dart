@@ -19,7 +19,7 @@ class SearchResultsPageView extends StatelessWidget {
           ),
           Column(
             children: [
-             Center(child: Text('Search Results')),
+              Center(child: Text('Search Results')),
             ],
           ),
           BottomNavBar(),
