@@ -29,6 +29,24 @@ class _$AppRouter extends RootStackRouter {
         child: const HomePage(),
       );
     },
+    SearchRoute.name: (routeData) {
+      return MaterialPageX<SearchPage>(
+        routeData: routeData,
+        child: const SearchPage(),
+      );
+    },
+    ProfileRoute.name: (routeData) {
+      return MaterialPageX<ProfilePage>(
+        routeData: routeData,
+        child: const ProfilePage(),
+      );
+    },
+    SearchResultsRoute.name: (routeData) {
+      return MaterialPageX<SearchResultsPage>(
+        routeData: routeData,
+        child: const SearchResultsPage(),
+      );
+    },
   };
 
   @override
@@ -40,6 +58,18 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           HomeRoute.name,
           path: '/home-page',
+        ),
+        RouteConfig(
+          SearchRoute.name,
+          path: '/search-page',
+        ),
+        RouteConfig(
+          ProfileRoute.name,
+          path: '/profile-page',
+        ),
+        RouteConfig(
+          SearchResultsRoute.name,
+          path: '/search-results-page',
         ),
       ];
 }
@@ -66,4 +96,40 @@ class HomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
+}
+
+/// generated route for
+/// [SearchPage]
+class SearchRoute extends PageRouteInfo<void> {
+  const SearchRoute()
+      : super(
+          SearchRoute.name,
+          path: '/search-page',
+        );
+
+  static const String name = 'SearchRoute';
+}
+
+/// generated route for
+/// [ProfilePage]
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute()
+      : super(
+          ProfileRoute.name,
+          path: '/profile-page',
+        );
+
+  static const String name = 'ProfileRoute';
+}
+
+/// generated route for
+/// [SearchResultsPage]
+class SearchResultsRoute extends PageRouteInfo<void> {
+  const SearchResultsRoute()
+      : super(
+          SearchResultsRoute.name,
+          path: '/search-results-page',
+        );
+
+  static const String name = 'SearchResultsRoute';
 }
