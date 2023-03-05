@@ -16,6 +16,7 @@ part 'router.gr.dart';
     AutoRoute<HomePage>(page: HomePage),
     AutoRoute<SearchPage>(page: SearchPage),
     AutoRoute<ProfilePage>(page: ProfilePage),
+    AutoRoute<SearchResultsPage>(page: SearchResultsPage),
   ],
 )
 class AppRouter extends _$AppRouter {}

@@ -10,5 +10,6 @@
   "settingsLogIn": "Log in",
   "settingsTermsOfService": "Terms of service",
   "settingsCommunityGuidelines": "Community Guidelines",
-  "settingsPrivacyPolicy": "Privacy Policy"
+  "settingsPrivacyPolicy": "Privacy Policy",
+  "searchInputHolder": "Where do you want to go?"
 }
