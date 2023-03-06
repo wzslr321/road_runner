@@ -9,3 +9,9 @@ services:
       - '8080:8080'
     volumes:
       - ./:/users
+  ravendb:
+    image: ravendb/ravendb:5.4-ubuntu-latest
+    ports:
+      - '8081:8080'
+    volumes:
+      - ./ravendb:/ravendb
