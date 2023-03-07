@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	pb "github.com/wzslr321/road_runner/server/users/gen/proto"
+	pb "github.com/wzslr321/road_runner/server/users/proto-gen"
 	"github.com/wzslr321/road_runner/server/users/settings"
 	"google.golang.org/grpc"
 	"log"
