@@ -1,6 +1,6 @@
 #!/bin/sh
 
-readonly go_gen_path="../server/users/gen/proto/"
+readonly go_gen_path="../server/users/proto-gen/"
 readonly curr_dir=$(pwd)
 readonly dart_gen_path="${curr_dir}/../client/lib/gen/proto/"
 readonly proto_file_path="${curr_dir}/auth.proto"
