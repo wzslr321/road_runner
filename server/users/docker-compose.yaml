@@ -8,10 +8,10 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - ./:/users
+      - ./src:/server/src
+    depends_on:
+      - scylladb
   scylladb:
     image: scylladb/scylla:5.1
     ports:
       - '8081:8081'
-    volumes:
-      - ./ravendb:/ravendb

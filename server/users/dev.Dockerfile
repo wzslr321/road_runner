@@ -1,12 +1,12 @@
 FROM golang:1.20.1-alpine
 
-WORKDIR /server
+WORKDIR /server/users
 
-COPY go.mod ./
-COPY go.sum ./
+COPY src/go.mod ./
+COPY src/go.sum ./
 
 RUN go install github.com/cosmtrek/air@latest
 
-COPY . .
+COPY src/ .
 
 CMD air
