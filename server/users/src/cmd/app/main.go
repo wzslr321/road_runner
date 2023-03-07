@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
-	pb "github.com/wzslr321/road_runner/server/users/proto-gen"
-	"github.com/wzslr321/road_runner/server/users/settings"
+	"github.com/gocql/gocql"
+	pb "github.com/wzslr321/road_runner/server/users/src/proto-gen"
+	"github.com/wzslr321/road_runner/server/users/src/settings"
+	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -25,6 +27,7 @@ func init() {
 	}
 
 	serverSettings = settings.GetServerConf(devMode)
+
 }
 
 func main() {
@@ -34,10 +37,29 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
+	logger, err := zap.NewProduction()
+	if err != nil {
+		log.Printf("Failed to create zap logger: %v", err)
+	}
+	defer logger.Sync()
+
+	cluster := gocql.NewCluster("scylladb:9042")
+	cluster.Consistency = gocql.Quorum
+	cluster.ProtoVersion = 4
+
+	session, err := cluster.CreateSession()
+	if err != nil {
+		log.Fatalf("Failed to create scylladb session: %v", err)
+	}
+	defer session.Close()
+	log.Println("Scylladb session started")
+
 	s := grpc.NewServer()
 	pb.RegisterAuthServer(s, &server{})
 	log.Printf("Server listening on port %v", listen.Addr())
-	if err := s.Serve(listen); err != nil {
+	if err = s.Serve(listen); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
+
+	logger.Info("Inserting test")
 }

@@ -21,7 +21,7 @@ const (
 )
 
 func GetServerConf(mode DevMode) *Server {
-	c := &Server{}
+	serv := &Server{}
 	configFile := "config.yaml"
 	if mode == Dev {
 		configFile = "config-dev.yaml"
@@ -46,10 +46,10 @@ func GetServerConf(mode DevMode) *Server {
 		// since this function is performed in Init function
 		log.Fatalf("Failed to read server config file: %v", err)
 	}
-	err = yaml.Unmarshal(f, c)
+	err = yaml.Unmarshal(f, serv)
 	if err != nil {
 		log.Fatalf("Failed to unmarshal server config file: %v", err)
 	}
 
-	return c
+	return serv
 }
