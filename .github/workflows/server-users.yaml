@@ -1,6 +1,6 @@
 name: server-users
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 #  push:
 #    paths:
 #      - 'server/users/**'
@@ -32,6 +32,6 @@ jobs:
           version: ${{ env.GOLANGCI-LINT_VERSION }}
           working-directory: './server/users/src'
       - name: Build
-        run: make build
+        run: go build -o ./tmp/main cmd/app/main.go
       - name: Test
         run: go test ./...
