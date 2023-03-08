@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gocql/gocql"
 	pb "github.com/wzslr321/road_runner/server/users/src/proto-gen"
 	"github.com/wzslr321/road_runner/server/users/src/settings"
@@ -32,7 +31,7 @@ func init() {
 
 func main() {
 
-	listen, err := net.Listen("tcp", fmt.Sprintf("%s", serverSettings.Address))
+	listen, err := net.Listen("tcp", serverSettings.Address)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
@@ -41,7 +40,9 @@ func main() {
 	if err != nil {
 		log.Printf("Failed to create zap logger: %v", err)
 	}
-	defer logger.Sync()
+	defer func(logger *zap.Logger) {
+		_ = logger.Sync()
+	}(logger)
 
 	cluster := gocql.NewCluster("scylladb:9042")
 	cluster.Consistency = gocql.Quorum
