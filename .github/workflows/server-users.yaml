@@ -1,12 +1,12 @@
 name: server-users
 
-on:
-  push:
-    paths:
-      - 'server/users/**'
-  pull_request:
-    paths:
-      - 'server/users/**'
+on: [push, pull_request]
+#  push:
+#    paths:
+#      - 'server/users/**'
+#  pull_request:
+#    paths:
+#      - 'server/users/**'
 
 defaults:
   run:
