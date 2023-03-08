@@ -27,9 +27,8 @@ jobs:
       - name: Lint
         uses: golangci/golangci-lint-action@v3
         env:
-          GOLANGCI-LINT_VERSION: v1.29
+          GOLANGCI-LINT_VERSION: v1.51.2
         with:
-          skip-go-installation: true
           version: ${{ env.GOLANGCI-LINT_VERSION }}
           working-directory: './server/users/src'
       - name: Build
