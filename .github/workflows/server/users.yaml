@@ -1,0 +1,38 @@
+name: server-users
+
+on:
+  push:
+    paths:
+      - 'server/users/**'
+  pull_request:
+    paths:
+      - 'server/users/**'
+
+defaults:
+  run:
+    working-directory: './server/users/src'
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        env:
+          GO_VERSION: 1.20.1
+        with:
+          go-version: ${{ env.GO_VERSION }}
+      - name: Lint
+        uses: golangci/golangci-lint-action@v3
+        env:
+          GOLANGCI-LINT_VERSION: v1.29
+        with:
+          skip-go-installation: true
+          version: ${{ env.GOLANGCI-LINT_VERSION }}
+          working-directory: './server/users/src'
+      - name: Build
+        run: make build
+      - name: Test
+        run: go test ./...
