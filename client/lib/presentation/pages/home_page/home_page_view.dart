@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:users_repository/users_repository.dart';
 
 import '../../core/widgets/bottom_navbar/bottom_navbar.dart';
 import 'widgets/ex_widgets.dart';
@@ -8,11 +10,21 @@ class HomePageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Stack(
         children: [
-          MapLocation(),
-          BottomNavBar(),
+          const MapLocation(),
+          const BottomNavBar(),
+          Center(
+            child: ElevatedButton(
+                onPressed: () async {
+                  final _result =
+                      await context.read<UsersRepository>().getUser("antek");
+                  final result = _result.getOrElse((l) => UserData());
+                  print(result);
+                },
+                child: const Text("click me")),
+          )
         ],
       ),
     );
