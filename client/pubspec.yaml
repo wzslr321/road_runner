@@ -20,6 +20,9 @@ dependencies:
   intl: any
   freezed_annotation: ^2.2.0
   mocktail: ^0.3.0
+  users_repository:
+    path: ./packages/users_repository
+  fpdart: ^0.5.0
 
 dev_dependencies:
   analyzer: ^5.7.1

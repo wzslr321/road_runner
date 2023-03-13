@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package queries;
+
+option go_package = "github.com/wzslr321/road_runner/server/proto";
+
+service Users{
+  rpc GetUser(GetUserRequest) returns (UserData) {}
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
+}
+
+message GetUserRequest {
+  string username = 1;
+}
+
+message UserData{
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string password = 4;
+}
+
+message DeleteUserRequest {
+  string id = 1;
+}
+
+message DeleteUserResponse {
+  bool success = 1;
+  string message = 2;
+}
