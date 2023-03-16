@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/wzslr321/road_runner/server/users/src/api"
 	pb "github.com/wzslr321/road_runner/server/users/src/proto-gen"
 	"google.golang.org/grpc"
 	"log"
@@ -8,8 +9,8 @@ import (
 )
 
 func main() {
-	service := NewUserService()
-	service = NewLoggingService(service)
+	service := api.NewUsersService()
+	service = api.NewLoggingService(service)
 
 	listener, err := net.Listen("tcp", ":50051")
 	if err != nil {
@@ -17,6 +18,6 @@ func main() {
 	}
 
 	server := grpc.NewServer()
-	pb.RegisterUsersServer(server, newGrpcServer())
+	pb.RegisterUsersServer(server, api.NewServer())
 	server.Serve(listener)
 }

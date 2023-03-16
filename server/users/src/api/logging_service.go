@@ -1,4 +1,4 @@
-package main
+package api
 
 import (
 	"context"
@@ -19,10 +19,10 @@ func NewLoggingService(child Service) Service {
 	return &LoggingService{child: child, logger: logger}
 }
 
-func (s *LoggingService) GetUser(ctx context.Context) (user *pb.UserData, err error) {
+func (s *LoggingService) handleGetUser(ctx context.Context) (user *pb.UserData, err error) {
 	defer func(start time.Time) {
 		s.logger.Info(fmt.Sprintf("user=%v\nerr=%s\ntook=%v", user, err, time.Since(start)))
 
 	}(time.Now())
-	return s.child.GetUser(ctx)
+	return s.child.handleGetUser(ctx)
 }
