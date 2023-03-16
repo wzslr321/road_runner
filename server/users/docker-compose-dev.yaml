@@ -9,6 +9,8 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    networks:
+      - users_network
   users:
     build:
       context: .
@@ -17,8 +19,33 @@ services:
       - DEV_MODE=DEV
     ports:
       - '192.168.0.100:50051:50051'
+      - '7070:7070'
     volumes:
       - ./src:/server/users
+    restart: always
     depends_on:
       scylladb:
         condition: service_healthy
+      prometheus:
+        condition: service_started
+
+    networks:
+      - users_network
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/prometheus-dev.yml:/etc/prometheus/prometheus.yml:Z
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention=20d'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - '9090:9090'
+    networks:
+      - users_network
+
+networks:
+  users_network:
+    driver: bridge
