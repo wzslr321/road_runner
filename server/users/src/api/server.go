@@ -7,9 +7,9 @@ type Server struct {
 	pb.UnimplementedUsersServer
 }
 
-func NewServer() *Server {
+func NewServer(service Service) *Server {
 	s := &Server{
-		service: NewUsersService(),
+		service: service,
 	}
 	return s
 }

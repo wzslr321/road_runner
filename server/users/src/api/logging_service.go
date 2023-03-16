@@ -19,10 +19,50 @@ func NewLoggingService(child Service) Service {
 	return &LoggingService{child: child, logger: logger}
 }
 
-func (s *LoggingService) handleGetUser(ctx context.Context) (user *pb.UserData, err error) {
+func (s *LoggingService) handleGetUser(ctx context.Context, req *pb.GetUserRequest) (user *pb.GetUserResponse, err error) {
 	defer func(start time.Time) {
 		s.logger.Info(fmt.Sprintf("user=%v\nerr=%s\ntook=%v", user, err, time.Since(start)))
 
 	}(time.Now())
-	return s.child.handleGetUser(ctx)
+	return s.child.handleGetUser(ctx, req)
+}
+
+func (s *LoggingService) handleUpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (user *pb.UpdateUserResponse, err error) {
+	defer func(start time.Time) {
+		s.logger.Info(fmt.Sprintf("TODO = ADD LOGGER TEXT", user, err, time.Since(start)))
+
+	}(time.Now())
+	return s.child.handleUpdateUser(ctx, req)
+}
+
+func (s *LoggingService) handleDeleteUser(ctx context.Context, req *pb.DeleteUserRequest) (user *pb.DeleteUserResponse, err error) {
+	defer func(start time.Time) {
+		s.logger.Info(fmt.Sprintf("TODO = ADD LOGGER TEXT", user, err, time.Since(start)))
+
+	}(time.Now())
+	return s.child.handleDeleteUser(ctx, req)
+}
+
+func (s *LoggingService) handleRegisterUser(ctx context.Context, req *pb.RegisterUserRequest) (user *pb.RegisterUserResponse, err error) {
+	defer func(start time.Time) {
+		s.logger.Info(fmt.Sprintf("TODO = ADD LOGGER TEXT", user, err, time.Since(start)))
+
+	}(time.Now())
+	return s.child.handleRegisterUser(ctx, req)
+}
+
+func (s *LoggingService) handleLoginUser(ctx context.Context, req *pb.LoginUserRequest) (user *pb.LoginUserResponse, err error) {
+	defer func(start time.Time) {
+		s.logger.Info(fmt.Sprintf("TODO = ADD LOGGER TEXT", user, err, time.Since(start)))
+
+	}(time.Now())
+	return s.child.handleLoginUser(ctx, req)
+}
+
+func (s *LoggingService) handleLogoutUser(ctx context.Context, req *pb.LogoutUserRequest) (user *pb.LogoutUserResponse, err error) {
+	defer func(start time.Time) {
+		s.logger.Info(fmt.Sprintf("TODO = ADD LOGGER TEXT", user, err, time.Since(start)))
+
+	}(time.Now())
+	return s.child.handleLogoutUser(ctx, req)
 }

@@ -18,6 +18,6 @@ func main() {
 	}
 
 	server := grpc.NewServer()
-	pb.RegisterUsersServer(server, api.NewServer())
+	pb.RegisterUsersServer(server, api.NewServer(service))
 	server.Serve(listener)
 }

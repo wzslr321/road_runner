@@ -22,8 +22,12 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UsersClient interface {
-	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*UserData, error)
+	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
+	RegisterUser(ctx context.Context, in *RegisterUserRequest, opts ...grpc.CallOption) (*RegisterUserResponse, error)
+	LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error)
+	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
+	LogoutUser(ctx context.Context, in *LogoutUserRequest, opts ...grpc.CallOption) (*LogoutUserResponse, error)
 }
 
 type usersClient struct {
@@ -34,8 +38,8 @@ func NewUsersClient(cc grpc.ClientConnInterface) UsersClient {
 	return &usersClient{cc}
 }
 
-func (c *usersClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*UserData, error) {
-	out := new(UserData)
+func (c *usersClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
+	out := new(GetUserResponse)
 	err := c.cc.Invoke(ctx, "/queries.Users/GetUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -52,12 +56,52 @@ func (c *usersClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opt
 	return out, nil
 }
 
+func (c *usersClient) RegisterUser(ctx context.Context, in *RegisterUserRequest, opts ...grpc.CallOption) (*RegisterUserResponse, error) {
+	out := new(RegisterUserResponse)
+	err := c.cc.Invoke(ctx, "/queries.Users/RegisterUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error) {
+	out := new(LoginUserResponse)
+	err := c.cc.Invoke(ctx, "/queries.Users/LoginUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
+	out := new(UpdateUserResponse)
+	err := c.cc.Invoke(ctx, "/queries.Users/UpdateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usersClient) LogoutUser(ctx context.Context, in *LogoutUserRequest, opts ...grpc.CallOption) (*LogoutUserResponse, error) {
+	out := new(LogoutUserResponse)
+	err := c.cc.Invoke(ctx, "/queries.Users/LogoutUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UsersServer is the server API for Users service.
 // All implementations must embed UnimplementedUsersServer
 // for forward compatibility
 type UsersServer interface {
-	GetUser(context.Context, *GetUserRequest) (*UserData, error)
+	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
+	RegisterUser(context.Context, *RegisterUserRequest) (*RegisterUserResponse, error)
+	LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error)
+	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	LogoutUser(context.Context, *LogoutUserRequest) (*LogoutUserResponse, error)
 	mustEmbedUnimplementedUsersServer()
 }
 
@@ -65,11 +109,23 @@ type UsersServer interface {
 type UnimplementedUsersServer struct {
 }
 
-func (UnimplementedUsersServer) GetUser(context.Context, *GetUserRequest) (*UserData, error) {
+func (UnimplementedUsersServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
 func (UnimplementedUsersServer) DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
+}
+func (UnimplementedUsersServer) RegisterUser(context.Context, *RegisterUserRequest) (*RegisterUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterUser not implemented")
+}
+func (UnimplementedUsersServer) LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LoginUser not implemented")
+}
+func (UnimplementedUsersServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedUsersServer) LogoutUser(context.Context, *LogoutUserRequest) (*LogoutUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LogoutUser not implemented")
 }
 func (UnimplementedUsersServer) mustEmbedUnimplementedUsersServer() {}
 
@@ -120,6 +176,78 @@ func _Users_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Users_RegisterUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).RegisterUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/queries.Users/RegisterUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).RegisterUser(ctx, req.(*RegisterUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_LoginUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).LoginUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/queries.Users/LoginUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).LoginUser(ctx, req.(*LoginUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).UpdateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/queries.Users/UpdateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Users_LogoutUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LogoutUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsersServer).LogoutUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/queries.Users/LogoutUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsersServer).LogoutUser(ctx, req.(*LogoutUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Users_ServiceDesc is the grpc.ServiceDesc for Users service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -134,6 +262,22 @@ var Users_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteUser",
 			Handler:    _Users_DeleteUser_Handler,
+		},
+		{
+			MethodName: "RegisterUser",
+			Handler:    _Users_RegisterUser_Handler,
+		},
+		{
+			MethodName: "LoginUser",
+			Handler:    _Users_LoginUser_Handler,
+		},
+		{
+			MethodName: "UpdateUser",
+			Handler:    _Users_UpdateUser_Handler,
+		},
+		{
+			MethodName: "LogoutUser",
+			Handler:    _Users_LogoutUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
