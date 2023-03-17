@@ -3,24 +3,16 @@ package api
 import (
 	"context"
 	pb "github.com/wzslr321/road_runner/server/users/src/proto-gen"
-	"log"
 )
 
 func (s *UsersService) handleGetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error) {
-	session, err := s.storage.CreateSession()
+
+	user, err := s.db.GetUser(req.Username)
 	if err != nil {
 		return nil, err
 	}
-	defer session.Close()
 
-	log.Printf("Scylla session sucessfully started")
-
-	return &pb.GetUserResponse{
-		Id:       "1",
-		Email:    "yes@op.pl",
-		Password: "1234",
-		Username: "john",
-	}, nil
+	return user, nil
 }
 func (s *UsersService) handleUpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.UpdateUserResponse, error) {
 	return nil, nil
