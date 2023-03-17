@@ -34,7 +34,7 @@ services:
   prometheus:
     image: prom/prometheus
     volumes:
-      - ./prometheus/prometheus-dev.yml:/etc/prometheus/prometheus.yml:Z
+      - ./prometheus/prometheus-dev.yml:/etc/prometheus/prometheus.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -45,6 +45,13 @@ services:
       - '9090:9090'
     networks:
       - users_network
+  grafana:
+    image: grafana/grafana:9.4.3
+    ports:
+      - '3000:3000'
+    networks:
+      - users_network
+
 
 networks:
   users_network:
