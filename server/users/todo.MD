@@ -1,4 +1,0 @@
-grafana
-jaeger
-traefik?
-consul?

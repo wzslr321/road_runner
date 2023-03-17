@@ -1,5 +1,8 @@
 package metrics
 
+// most of this part comes from great https://github.com/AleksK1NG/Go-GRPC-Auth-Microservice
+// i recommend to check it out
+
 import (
 	"github.com/labstack/echo/v4"
 	"github.com/prometheus/client_golang/prometheus"
