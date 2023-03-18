@@ -9,7 +9,7 @@ func (s *UsersService) handleGetUser(ctx context.Context, req *pb.GetUserRequest
 
 	user, err := s.db.GetUser(req.Username)
 	if err != nil {
-		return nil, err
+		return &pb.GetUserResponse{Code: "404", Message: err.Error()}, nil
 	}
 
 	return user, nil
