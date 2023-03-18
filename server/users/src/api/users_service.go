@@ -5,7 +5,7 @@ import (
 )
 
 type UsersService struct {
-	db storage.Scylla
+	db storage.Database
 }
 
 func NewUsersService() Service {
