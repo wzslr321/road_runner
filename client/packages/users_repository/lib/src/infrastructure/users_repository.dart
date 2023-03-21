@@ -11,7 +11,7 @@ class UsersRepository implements UsersRepositoryI {
   @override
   Future<CallResult> getUser(String username) async {
     final channel = ClientChannel(
-      'localhost',
+      '192.168.0.100',
       port: 50051,
       options: ChannelOptions(
         credentials: const ChannelCredentials.insecure(),
