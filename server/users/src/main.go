@@ -1,13 +1,16 @@
 package main
 
 import (
+	"crypto/tls"
 	grpcprometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/wzslr321/road_runner/server/users/src/api"
 	"github.com/wzslr321/road_runner/server/users/src/pkg/interceptors"
 	"github.com/wzslr321/road_runner/server/users/src/pkg/metrics"
 	pb "github.com/wzslr321/road_runner/server/users/src/proto-gen"
+	"github.com/wzslr321/road_runner/server/users/src/utils"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
 	"log"
 	"net"
@@ -26,10 +29,17 @@ func main() {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 
+	cert, err := tls.LoadX509KeyPair("./cert/server_cert.pem", "./cert/server_key.pem")
+	if err != nil {
+		log.Fatalf("Failed to load cert: %v", err)
+	}
+
 	server := grpc.NewServer(
+		grpc.Creds(credentials.NewServerTLSFromCert(&cert)),
 		grpc.KeepaliveParams(keepalive.ServerParameters{}),
 		grpc.UnaryInterceptor(intercs.Metrics),
 		grpc.ChainUnaryInterceptor(grpcprometheus.UnaryServerInterceptor),
+		grpc.ChainUnaryInterceptor(utils.EnsureValidToken),
 	)
 	pb.RegisterUsersServer(server, api.NewServer(service))
 	grpcprometheus.Register(server)

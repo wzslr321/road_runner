@@ -1,6 +1,8 @@
 package api
 
-import pb "github.com/wzslr321/road_runner/server/users/src/proto-gen"
+import (
+	pb "github.com/wzslr321/road_runner/server/users/src/proto-gen"
+)
 
 type Server struct {
 	service Service
