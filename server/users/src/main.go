@@ -8,7 +8,6 @@ import (
 	"github.com/wzslr321/road_runner/server/users/src/pkg/interceptors"
 	"github.com/wzslr321/road_runner/server/users/src/pkg/metrics"
 	pb "github.com/wzslr321/road_runner/server/users/src/proto-gen"
-	"github.com/wzslr321/road_runner/server/users/src/utils"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/keepalive"
@@ -39,8 +38,9 @@ func main() {
 		grpc.KeepaliveParams(keepalive.ServerParameters{}),
 		grpc.UnaryInterceptor(intercs.Metrics),
 		grpc.ChainUnaryInterceptor(grpcprometheus.UnaryServerInterceptor),
-		grpc.ChainUnaryInterceptor(utils.EnsureValidToken),
+		grpc.ChainUnaryInterceptor(intercs.EnsureValidToken),
 	)
+
 	pb.RegisterUsersServer(server, api.NewServer(service))
 	grpcprometheus.Register(server)
 	http.Handle("/metrics", promhttp.Handler())
