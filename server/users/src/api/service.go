@@ -6,10 +6,10 @@ import (
 )
 
 type Service interface {
-	handleGetUser(ctx context.Context, request *pb.GetUserRequest) (*pb.GetUserResponse, error)
-	handleUpdateUser(ctx context.Context, request *pb.UpdateUserRequest) (*pb.UpdateUserResponse, error)
-	handleDeleteUser(ctx context.Context, request *pb.DeleteUserRequest) (*pb.DeleteUserResponse, error)
-	handleRegisterUser(ctx context.Context, request *pb.RegisterUserRequest) (*pb.RegisterUserResponse, error)
-	handleLoginUser(ctx context.Context, request *pb.LoginUserRequest) (*pb.LoginUserResponse, error)
-	handleLogoutUser(ctx context.Context, request *pb.LogoutUserRequest) (*pb.LogoutUserResponse, error)
+	handleGetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error)
+	handleUpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.UpdateUserResponse, error)
+	handleDeleteUser(ctx context.Context, req *pb.DeleteUserRequest) (*pb.DeleteUserResponse, error)
+	handleRegisterUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserResponse, error)
+	handleLoginUser(ctx context.Context, req *pb.LoginUserRequest) (*pb.LoginUserResponse, error)
+	handleLogoutUser(ctx context.Context, req *pb.LogoutUserRequest) (*pb.LogoutUserResponse, error)
 }

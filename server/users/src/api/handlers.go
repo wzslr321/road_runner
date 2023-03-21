@@ -7,7 +7,7 @@ import (
 
 func (s *UsersService) handleGetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error) {
 
-	user, err := s.db.GetUser(req.Username)
+	user, err := s.db.GetUser(req)
 	if err != nil {
 		return &pb.GetUserResponse{Code: "404", Message: err.Error()}, nil
 	}
@@ -20,7 +20,7 @@ func (s *UsersService) handleUpdateUser(ctx context.Context, req *pb.UpdateUserR
 func (s *UsersService) handleDeleteUser(ctx context.Context, req *pb.DeleteUserRequest) (*pb.DeleteUserResponse, error) {
 	return nil, nil
 }
-func (s *UsersService) handleRegisterUser(ctx context.Context, req *pb.RegisterUserRequest) (*pb.RegisterUserResponse, error) {
+func (s *UsersService) handleRegisterUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserResponse, error) {
 	return nil, nil
 }
 func (s *UsersService) handleLoginUser(ctx context.Context, req *pb.LoginUserRequest) (*pb.LoginUserResponse, error) {
