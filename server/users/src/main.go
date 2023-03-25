@@ -38,7 +38,7 @@ func main() {
 		grpc.KeepaliveParams(keepalive.ServerParameters{}),
 		grpc.UnaryInterceptor(intercs.Metrics),
 		grpc.ChainUnaryInterceptor(grpcprometheus.UnaryServerInterceptor),
-		grpc.ChainUnaryInterceptor(intercs.EnsureValidToken),
+		// grpc.ChainUnaryInterceptor(intercs.EnsureValidToken),
 	)
 
 	pb.RegisterUsersServer(server, api.NewServer(service))
