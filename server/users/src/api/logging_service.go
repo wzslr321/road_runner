@@ -43,12 +43,11 @@ func (s *LoggingService) handleDeleteUser(ctx context.Context, req *pb.DeleteUse
 	return s.child.handleDeleteUser(ctx, req)
 }
 
-func (s *LoggingService) handleRegisterUser(ctx context.Context, req *pb.CreateUserRequest) (user *pb.CreateUserResponse, err error) {
+func (s *LoggingService) handleCreateUser(ctx context.Context, req *pb.CreateUserRequest) (user *pb.CreateUserResponse, err error) {
 	defer func(start time.Time) {
 		s.logger.Info(fmt.Sprintf("TODO = ADD LOGGER TEXT", user, err, time.Since(start)))
-
 	}(time.Now())
-	return s.child.handleRegisterUser(ctx, req)
+	return s.child.handleCreateUser(ctx, req)
 }
 
 func (s *LoggingService) handleLoginUser(ctx context.Context, req *pb.LoginUserRequest) (user *pb.LoginUserResponse, err error) {
