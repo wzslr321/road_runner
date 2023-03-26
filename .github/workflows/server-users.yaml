@@ -32,6 +32,6 @@ jobs:
           version: ${{ env.GOLANGCI-LINT_VERSION }}
           working-directory: './server/users/src'
       - name: Build
-        run: go build -o ./tmp/main cmd/app/main.go
+        run: go build -o ./tmp/main main.go
       - name: Test
         run: go test ./...
