@@ -33,5 +33,5 @@ and choose the best transport for them. If everything go well, it may become rea
 ## Contributions
 
 Road Runner is open to contributions, but please first
-read <a href="https://github.com/wzslr321/artiver/blob/main/CONTRIBUTING.md"> CONTRIBUTING.md </a> to get
+read <a href="https://github.com/wzslr321/road_runner/blob/main/CONTRIBUTING.md"> CONTRIBUTING.md </a> to get
 a general overview on how to contribute.
