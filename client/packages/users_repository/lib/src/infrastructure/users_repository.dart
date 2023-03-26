@@ -36,4 +36,10 @@ class UsersRepository implements UsersRepositoryI {
       return left(const CallFailure.serverError());
     }
   }
+
+  @override
+  Future<CallResult> updateUser(String username) {
+    // TODO: implement updateUser
+    throw UnimplementedError();
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:users_repository/users_repository.dart';
@@ -19,11 +20,14 @@ class HomePageView extends StatelessWidget {
             child: ElevatedButton(
                 onPressed: () async {
                   final _result =
-                      await context.read<UsersRepository>().getUser("antek");
-                  final result = _result.getOrElse((l) => GetUserResponse());
-                  print(result);
+                      await context.read<UsersRepository>().getUser('antek');
+                 final result = _result.getOrElse((l) => GetUserResponse());
+                 if(kDebugMode){
+                   debugPrint(result.toString());
+                 }
+
                 },
-                child: const Text("click me")),
+                child: const Text('click me')),
           )
         ],
       ),
