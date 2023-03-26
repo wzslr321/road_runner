@@ -20,7 +20,7 @@ class HomePageView extends StatelessWidget {
                 onPressed: () async {
                   final _result =
                       await context.read<UsersRepository>().getUser("antek");
-                  final result = _result.getOrElse((l) => UserData());
+                  final result = _result.getOrElse((l) => GetUserResponse());
                   print(result);
                 },
                 child: const Text("click me")),

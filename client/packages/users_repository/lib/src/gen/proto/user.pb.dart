@@ -208,19 +208,19 @@ class DeleteUserRequest extends $pb.GeneratedMessage {
 
 class DeleteUserResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'DeleteUserResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'queries'), createEmptyInstance: create)
-    ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'success')
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'code')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..hasRequiredFields = false
   ;
 
   DeleteUserResponse._() : super();
   factory DeleteUserResponse({
-    $core.bool? success,
+    $core.String? code,
     $core.String? message,
   }) {
     final _result = create();
-    if (success != null) {
-      _result.success = success;
+    if (code != null) {
+      _result.code = code;
     }
     if (message != null) {
       _result.message = message;
@@ -249,13 +249,13 @@ class DeleteUserResponse extends $pb.GeneratedMessage {
   static DeleteUserResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.bool get success => $_getBF(0);
+  $core.String get code => $_getSZ(0);
   @$pb.TagNumber(1)
-  set success($core.bool v) { $_setBool(0, v); }
+  set code($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSuccess() => $_has(0);
+  $core.bool hasCode() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSuccess() => clearField(1);
+  void clearCode() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get message => $_getSZ(1);
@@ -344,19 +344,19 @@ class CreateUserRequest extends $pb.GeneratedMessage {
 
 class CreateUserResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'CreateUserResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'queries'), createEmptyInstance: create)
-    ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'success')
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'code')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..hasRequiredFields = false
   ;
 
   CreateUserResponse._() : super();
   factory CreateUserResponse({
-    $core.bool? success,
+    $core.String? code,
     $core.String? message,
   }) {
     final _result = create();
-    if (success != null) {
-      _result.success = success;
+    if (code != null) {
+      _result.code = code;
     }
     if (message != null) {
       _result.message = message;
@@ -385,13 +385,13 @@ class CreateUserResponse extends $pb.GeneratedMessage {
   static CreateUserResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.bool get success => $_getBF(0);
+  $core.String get code => $_getSZ(0);
   @$pb.TagNumber(1)
-  set success($core.bool v) { $_setBool(0, v); }
+  set code($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSuccess() => $_has(0);
+  $core.bool hasCode() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSuccess() => clearField(1);
+  void clearCode() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get message => $_getSZ(1);
@@ -530,6 +530,7 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'email')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'password')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
     ..hasRequiredFields = false
   ;
 
@@ -538,6 +539,7 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
     $core.String? username,
     $core.String? email,
     $core.String? password,
+    $core.String? id,
   }) {
     final _result = create();
     if (username != null) {
@@ -548,6 +550,9 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
     }
     if (password != null) {
       _result.password = password;
+    }
+    if (id != null) {
+      _result.id = id;
     }
     return _result;
   }
@@ -598,23 +603,32 @@ class UpdateUserRequest extends $pb.GeneratedMessage {
   $core.bool hasPassword() => $_has(2);
   @$pb.TagNumber(4)
   void clearPassword() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get id => $_getSZ(3);
+  @$pb.TagNumber(5)
+  set id($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasId() => $_has(3);
+  @$pb.TagNumber(5)
+  void clearId() => clearField(5);
 }
 
 class UpdateUserResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'UpdateUserResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'queries'), createEmptyInstance: create)
-    ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'success')
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'code')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
     ..hasRequiredFields = false
   ;
 
   UpdateUserResponse._() : super();
   factory UpdateUserResponse({
-    $core.bool? success,
+    $core.String? code,
     $core.String? message,
   }) {
     final _result = create();
-    if (success != null) {
-      _result.success = success;
+    if (code != null) {
+      _result.code = code;
     }
     if (message != null) {
       _result.message = message;
@@ -643,13 +657,13 @@ class UpdateUserResponse extends $pb.GeneratedMessage {
   static UpdateUserResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.bool get success => $_getBF(0);
+  $core.String get code => $_getSZ(0);
   @$pb.TagNumber(1)
-  set success($core.bool v) { $_setBool(0, v); }
+  set code($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasSuccess() => $_has(0);
+  $core.bool hasCode() => $_has(0);
   @$pb.TagNumber(1)
-  void clearSuccess() => clearField(1);
+  void clearCode() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get message => $_getSZ(1);
