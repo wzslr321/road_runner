@@ -14,6 +14,9 @@ jobs:
           channel: ${{inputs.flutter_channel}}
           cache: true
           cache-key: flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}
+      - name:  Install Dependencies
+        run: flutter pub get
+        working-directory: client
       - name: Generate code
         run: flutter pub run build_runner build --delete-conflicting-outputs && flutter gen-l10n
         working-directory: client
