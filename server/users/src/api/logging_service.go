@@ -15,9 +15,11 @@ type LoggingService struct {
 
 func NewLoggingService(child Service) Service {
 	logger, _ := zap.NewProduction()
-	defer logger.Sync()
+	defer logger.Sync() //nolint:errcheck
 	return &LoggingService{child: child, logger: logger}
 }
+
+// TODO make these message better, placeholders for now
 
 func (s *LoggingService) handleGetUser(ctx context.Context, req *pb.GetUserRequest) (user *pb.GetUserResponse, err error) {
 	defer func(start time.Time) {
@@ -29,7 +31,7 @@ func (s *LoggingService) handleGetUser(ctx context.Context, req *pb.GetUserReque
 
 func (s *LoggingService) handleUpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (user *pb.UpdateUserResponse, err error) {
 	defer func(start time.Time) {
-		s.logger.Info(fmt.Sprintf("TODO = ADD LOGGER TEXT", user, err, time.Since(start)))
+		s.logger.Info(fmt.Sprintf("user=%v\nerr=%s\ntime\ntook=%v", user, err, time.Since(start)))
 
 	}(time.Now())
 	return s.child.handleUpdateUser(ctx, req)
@@ -37,31 +39,28 @@ func (s *LoggingService) handleUpdateUser(ctx context.Context, req *pb.UpdateUse
 
 func (s *LoggingService) handleDeleteUser(ctx context.Context, req *pb.DeleteUserRequest) (user *pb.DeleteUserResponse, err error) {
 	defer func(start time.Time) {
-		s.logger.Info(fmt.Sprintf("TODO = ADD LOGGER TEXT", user, err, time.Since(start)))
-
+		s.logger.Info(fmt.Sprintf("user=%v\nerr=%s\ntime\ntook=%v", user, err, time.Since(start)))
 	}(time.Now())
 	return s.child.handleDeleteUser(ctx, req)
 }
 
 func (s *LoggingService) handleCreateUser(ctx context.Context, req *pb.CreateUserRequest) (user *pb.CreateUserResponse, err error) {
 	defer func(start time.Time) {
-		s.logger.Info(fmt.Sprintf("TODO = ADD LOGGER TEXT", user, err, time.Since(start)))
+		s.logger.Info(fmt.Sprintf("user=%v\nerr=%s\ntime\ntook=%v", user, err, time.Since(start)))
 	}(time.Now())
 	return s.child.handleCreateUser(ctx, req)
 }
 
 func (s *LoggingService) handleLoginUser(ctx context.Context, req *pb.LoginUserRequest) (user *pb.LoginUserResponse, err error) {
 	defer func(start time.Time) {
-		s.logger.Info(fmt.Sprintf("TODO = ADD LOGGER TEXT", user, err, time.Since(start)))
-
+		s.logger.Info(fmt.Sprintf("user=%v\nerr=%s\ntime\ntook=%v", user, err, time.Since(start)))
 	}(time.Now())
 	return s.child.handleLoginUser(ctx, req)
 }
 
 func (s *LoggingService) handleLogoutUser(ctx context.Context, req *pb.LogoutUserRequest) (user *pb.LogoutUserResponse, err error) {
 	defer func(start time.Time) {
-		s.logger.Info(fmt.Sprintf("TODO = ADD LOGGER TEXT", user, err, time.Since(start)))
-
+		s.logger.Info(fmt.Sprintf("user=%v\nerr=%s\ntime\ntook=%v", user, err, time.Since(start)))
 	}(time.Now())
 	return s.child.handleLogoutUser(ctx, req)
 }

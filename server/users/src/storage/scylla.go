@@ -85,7 +85,11 @@ func (s *Scylla) CreateUser(req *pb.CreateUserRequest) (*pb.CreateUserResponse, 
 	if !ok {
 		return nil, fmt.Errorf("invalid password, must 8-16 characters long, one uppercase letter, one lowercase letter, one digit and one special character")
 	}
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), 8)
+	var hashedPassword []byte
+	hashedPassword, err = bcrypt.GenerateFromPassword([]byte(req.Password), 8)
+	if err != nil {
+		return nil, err
+	}
 	q := fmt.Sprintf("INSERT INTO users.users (id, email, username, password) VALUES ('%s', '%s', '%s', '%s')", uid, req.Email, req.Username, hashedPassword)
 	err = session.Query(q, nil).Exec()
 	if err != nil {

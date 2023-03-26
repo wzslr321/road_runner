@@ -18,6 +18,9 @@ import (
 
 func main() {
 	ms, err := metrics.Create("0.0.0.0:7070", "users")
+	if err != nil {
+		log.Fatalf("Failed to create metrics: %v", err)
+	}
 	intercs := interceptors.NewInterceptorManager(ms)
 
 	service := api.NewUsersService()
@@ -44,5 +47,5 @@ func main() {
 	pb.RegisterUsersServer(server, api.NewServer(service))
 	grpcprometheus.Register(server)
 	http.Handle("/metrics", promhttp.Handler())
-	server.Serve(listener)
+	server.Serve(listener) //nolint:errcheck
 }

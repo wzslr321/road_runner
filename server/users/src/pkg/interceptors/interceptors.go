@@ -22,10 +22,10 @@ func NewInterceptorManager(metr metrics.Metrics) *InterceptorManager {
 func (im *InterceptorManager) Metrics(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 	start := time.Now()
 	resp, err := handler(ctx, req)
-	var status = http.StatusOK
 	if err != nil {
-		// TODO
+		return nil, err
 	}
+	var status = http.StatusOK
 	im.metr.ObserveResponseTime(status, info.FullMethod, info.FullMethod, time.Since(start).Seconds())
 	im.metr.IncHits(status, info.FullMethod, info.FullMethod)
 
