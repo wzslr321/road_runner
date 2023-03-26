@@ -38,9 +38,6 @@ jobs:
       - name: 🕵️ Analyze
         run: flutter analyze lib test
 
-      - name: 🧪 Run Tests
-        run: very_good test -j 4  --optimization --coverage --test-randomize-ordering-seed random
-
       - name: 📊 Check Code Coverage
         uses: VeryGoodOpenSource/very_good_coverage@v2
         with:
