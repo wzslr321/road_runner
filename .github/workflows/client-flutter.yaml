@@ -13,8 +13,7 @@ jobs:
         run: flutter pub run build_runner build --delete-conflicting-outputs && flutter gen-l10n
       - name: Generate proto
         run: make client
-        with:
-          working-directory: proto
+        working-directory: './proto'
   build:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1.12.0
     with:
