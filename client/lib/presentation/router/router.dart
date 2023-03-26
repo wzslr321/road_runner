@@ -13,6 +13,7 @@ part 'router.gr.dart';
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
     AutoRoute<SplashPage>(page: SplashPage, initial: true),
+    AutoRoute<LoginPage>(page: LoginPage),
     AutoRoute<HomePage>(page: HomePage),
     AutoRoute<SearchPage>(page: SearchPage),
     AutoRoute<ProfilePage>(page: ProfilePage),
