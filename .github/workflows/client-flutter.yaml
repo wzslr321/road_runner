@@ -3,7 +3,7 @@ on: [ push, pull_request ]
 
 jobs:
   build:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1.12.0
     with:
       coverage_excludes: "*.g.dart *.freezed.dart *.gen.dart *.pb.dart *.pbenum.dart *.pbgrpc.dart *.pbjson.dart" # defaults to "" (none)
 
