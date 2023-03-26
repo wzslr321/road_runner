@@ -5,13 +5,16 @@ import (
 	"github.com/gocql/gocql"
 	"github.com/google/uuid"
 	"github.com/scylladb/gocqlx/v2"
+	"github.com/wzslr321/road_runner/server/users/src/pkg/auth"
 	pb "github.com/wzslr321/road_runner/server/users/src/proto-gen"
 	"github.com/wzslr321/road_runner/server/users/src/types"
+	"golang.org/x/crypto/bcrypt"
 	"log"
 )
 
 type Scylla struct {
-	cluster *gocql.ClusterConfig
+	cluster   *gocql.ClusterConfig
+	validator auth.Validator
 }
 
 func New() *Scylla {
@@ -66,7 +69,7 @@ func (s *Scylla) GetUser(req *pb.GetUserRequest) (*pb.GetUserResponse, error) {
 		Username: user.Username,
 		Email:    user.Email,
 		Code:     "200",
-		Message:  fmt.Sprintf("Successfully retrieved user with password %s", user.Password),
+		Message:  "Successfully retrieved user",
 	}, nil
 }
 
@@ -78,8 +81,12 @@ func (s *Scylla) CreateUser(req *pb.CreateUserRequest) (*pb.CreateUserResponse, 
 	}
 
 	uid := uuid.Must(uuid.NewRandom()).String()
-
-	q := fmt.Sprintf("INSERT INTO users.users (id, email, username, password) VALUES ('%s', '%s', '%s', '%s')", uid, req.Email, req.Username, req.Password)
+	ok := s.validator.ValidatePassword(req.Password)
+	if !ok {
+		return nil, fmt.Errorf("invalid password, must 8-16 characters long, one uppercase letter, one lowercase letter, one digit and one special character")
+	}
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), 8)
+	q := fmt.Sprintf("INSERT INTO users.users (id, email, username, password) VALUES ('%s', '%s', '%s', '%s')", uid, req.Email, req.Username, hashedPassword)
 	err = session.Query(q, nil).Exec()
 	if err != nil {
 		return nil, err
@@ -89,11 +96,33 @@ func (s *Scylla) CreateUser(req *pb.CreateUserRequest) (*pb.CreateUserResponse, 
 }
 
 func (s *Scylla) UpdateUser(req *pb.UpdateUserRequest) (*pb.UpdateUserResponse, error) {
-	return &pb.UpdateUserResponse{Success: true}, nil
+	session, err := gocqlx.WrapSession(s.cluster.CreateSession())
+	if err != nil {
+		return nil, err
+	}
+
+	q := fmt.Sprintf("UPDATE users.users SET username='%s', email='%s', password='%s' WHERE id='%s'", req.Username, req.Email, req.Password, req.Id)
+	err = session.Query(q, nil).Exec()
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.UpdateUserResponse{Code: "200", Message: fmt.Sprintf("Successfully updated user with id %s", req.Id)}, nil
 }
 
 func (s *Scylla) DeleteUser(req *pb.DeleteUserRequest) (*pb.DeleteUserResponse, error) {
-	return &pb.DeleteUserResponse{Success: true}, nil
+	session, err := gocqlx.WrapSession(s.cluster.CreateSession())
+	if err != nil {
+		return nil, err
+	}
+
+	q := fmt.Sprintf("DELETE FROM users.users WHERE id = '%s'", req.Id)
+	err = session.Query(q, nil).Exec()
+	if err != nil {
+		return nil, err
+	}
+
+	return &pb.DeleteUserResponse{Code: "200", Message: fmt.Sprintf("Successfully deleted user with id %s", req.Id)}, nil
 }
 
 func tryToCreateKeyspace(session *gocqlx.Session) error {
