@@ -15,10 +15,18 @@ func (s *UsersService) handleGetUser(ctx context.Context, req *pb.GetUserRequest
 	return user, nil
 }
 func (s *UsersService) handleUpdateUser(ctx context.Context, req *pb.UpdateUserRequest) (*pb.UpdateUserResponse, error) {
-	return nil, nil
+	resp, err := s.db.UpdateUser(req)
+	if err != nil {
+		return &pb.UpdateUserResponse{Code: "500", Message: err.Error()}, nil
+	}
+	return resp, nil
 }
 func (s *UsersService) handleDeleteUser(ctx context.Context, req *pb.DeleteUserRequest) (*pb.DeleteUserResponse, error) {
-	return nil, nil
+	resp, err := s.db.DeleteUser(req)
+	if err != nil {
+		return &pb.DeleteUserResponse{Code: "500", Message: err.Error()}, nil
+	}
+	return resp, nil
 }
 
 // i dont like this naming but im not sure if create will be better, gotta consider TODO

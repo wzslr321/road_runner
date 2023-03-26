@@ -1,4 +1,4 @@
-package tokens
+package auth
 
 import (
 	"google.golang.org/grpc/codes"

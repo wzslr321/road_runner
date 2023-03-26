@@ -2,8 +2,8 @@ package interceptors
 
 import (
 	"context"
+	"github.com/wzslr321/road_runner/server/users/src/pkg/auth"
 	"github.com/wzslr321/road_runner/server/users/src/pkg/metrics"
-	"github.com/wzslr321/road_runner/server/users/src/pkg/tokens"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 	"net/http"
@@ -12,7 +12,7 @@ import (
 
 type InterceptorManager struct {
 	metr   metrics.Metrics
-	tokens tokens.Jwt
+	tokens auth.Jwt
 }
 
 func NewInterceptorManager(metr metrics.Metrics) *InterceptorManager {
@@ -35,10 +35,10 @@ func (im *InterceptorManager) Metrics(ctx context.Context, req interface{}, info
 func (im *InterceptorManager) EnsureValidToken(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
-		return nil, tokens.ErrMissingMetadata
+		return nil, auth.ErrMissingMetadata
 	}
 	if !im.tokens.ValidateToken(md["authorization"]) {
-		return nil, tokens.ErrInvalidToken
+		return nil, auth.ErrInvalidToken
 	}
 	return handler(ctx, req)
 }
