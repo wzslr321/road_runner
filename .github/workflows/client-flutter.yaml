@@ -2,8 +2,13 @@ name: client-flutter
 on: [ push, pull_request ]
 
 jobs:
-  generate_files:
+  build:
+    defaults:
+      run:
+        working-directory: client
+
     runs-on: ubuntu-latest
+
     steps:
       - name: 📚 Git Checkout
         uses: actions/checkout@v3
@@ -14,22 +19,31 @@ jobs:
           channel: master
           cache: true
           cache-key: flutter-:os:-:channel:-:version:-:arch:-:hash:-${{ hashFiles('**/pubspec.lock') }}
-      - name:  Install Dependencies
-        run: flutter pub get
-        working-directory: client
+
+      - name: 📦 Install Dependencies
+        run: |
+          flutter pub global activate very_good_cli
+          very_good --analytics false
+          very_good packages get --recursive
       - name: Generate code
         run: flutter pub run build_runner build --delete-conflicting-outputs && flutter gen-l10n
         working-directory: client
       - name: Generate proto
         run: make client
         working-directory: proto
-  build:
-    needs: generate_files
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/flutter_package.yml@v1.12.0
-    with:
-      coverage_excludes: "*.g.dart *.freezed.dart *.gen.dart *.pb.dart *.pbenum.dart *.pbgrpc.dart *.pbjson.dart" # defaults to "" (none)
 
-      flutter_channel: master
-      flutter_version: 3.9.0-1.0.pre.33
-      working_directory: client
-      min_coverage: 0
+      - name: ✨ Check Formatting
+        run: dart format --set-exit-if-changed lib test
+
+      - name: 🕵️ Analyze
+        run: flutter analyze lib test
+
+      - name: 🧪 Run Tests
+        run: very_good test -j 4  --optimization --coverage --test-randomize-ordering-seed random
+
+      - name: 📊 Check Code Coverage
+        uses: VeryGoodOpenSource/very_good_coverage@v2
+        with:
+          path: client/coverage/lcov.info
+          exclude: "*.g.dart *.freezed.dart *.gen.dart *.pb.dart *.pbenum.dart *.pbgrpc.dart *.pbjson.dart"
+          min_coverage: 0
