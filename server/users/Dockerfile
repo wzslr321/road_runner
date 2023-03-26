@@ -10,6 +10,4 @@ RUN apk add make
 
 COPY . .
 
-RUN chmod 777 run-prod.sh
-
-CMD ["sh run-prod.sh"]
+CMD [" go build -o ./tmp/main cmd/app/main.go"]

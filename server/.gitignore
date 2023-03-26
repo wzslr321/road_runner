@@ -1,2 +1,4 @@
 **/tmp/
 **/bin/
+users/src/cert/
+.env
