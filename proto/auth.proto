@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package queries;
-
-option go_package = "github.com/wzslr321/road_runner/server/proto";
-
-service Auth{
-}
-

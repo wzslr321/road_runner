@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.road.runner.road_runner">
+    package="com.road.runner">
    <application
         android:label="road_runner"
         android:name="${applicationName}"
