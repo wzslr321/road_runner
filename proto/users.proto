@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package queries;
+package users;
 
-option go_package = "github.com/wzslr321/road_runner/server/proto";
+option go_package = "github.com/wzslr321/road_runner/server/users/src";
 
 service Users{
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
