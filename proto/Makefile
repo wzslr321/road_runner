@@ -13,23 +13,13 @@ users_client:
 	./gen_client.sh users ../client/packages/users_repository/lib/src/gen/proto/
 
 users: generate_users_server generate_users_client
-
-client: generate_users_client
-
-server: generate_users_server
-
-ci_client:
+=======
+generate_users_server:
 	@echo "Generating users.proto for client"
-	./gen_client_ci.sh users ../client/packages/users_repository/lib/src/gen/proto/
+	./generate_users_server.sh user ../server/users/src/proto-gen/
 
-# rides ms
+generate_users_client:
+	@echo "Generating users.proto for client"
+	./generate_users_client.sh user ../client/packages/users_repository/lib/src/gen/proto/
 
-rides_server:
-	@echo "Generating rides.proto for server"
-	./gen_server.sh rides ../server/rides/src/proto-gen/
-
-rides_client:
-	@echo "Generating rides.proto for client"
-	./gen_client.sh rides ../client/packages/rides_repository/lib/src/gen/proto/
-
-rides: generate_rides_server generate_rides_client
+all: generate_users_server generate_users_client

@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package queries;
+
+option go_package = "github.com/wzslr321/road_runner/server/proto";
+
+service Users{
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse) {}
+
+  rpc LoginUser(LoginUserRequest) returns (LoginUserResponse) {}
+  rpc LogoutUser(LogoutUserRequest) returns (LogoutUserResponse) {}
+}
+
+message GetUserRequest {
+  string username = 1;
+}
+
+message GetUserResponse{
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string code = 4;
+  string message = 5;
+}
+
+message DeleteUserRequest {
+  string id = 1;
+}
+
+message DeleteUserResponse {
+  string code = 1;
+  string message = 2;
+}
+
+message CreateUserRequest{
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message CreateUserResponse{
+  string code = 1;
+  string message = 2;
+}
+
+message LoginUserRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginUserResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message UpdateUserRequest {
+  string username = 2;
+  string email = 3;
+  string password = 4;
+  string id = 5; // retrieve it from token later?
+}
+
+message UpdateUserResponse {
+  string code = 1;
+  string message = 2;
+}
+
+message LogoutUserRequest {
+  string id = 1;
+}
+
+message LogoutUserResponse {
+  bool success = 1;
+  string message = 2;
+}
