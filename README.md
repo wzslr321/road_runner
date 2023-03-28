@@ -21,6 +21,12 @@ As MVP it will be a simple app, which lets people register their companies like 
 assigned to these companies and go online in the app. Normal users can then compare prices, ratings and other aspects 
 and choose the best transport for them. If everything go well, it may become real product, integrated with real companies.
 
+--- 
+
+<h3> I am open to collaborating, if you want to work on this project, do not hesitate to reach out! </h3>
+
+---
+
 ## Project Structure
 
 | Codebase                     |        Description        |

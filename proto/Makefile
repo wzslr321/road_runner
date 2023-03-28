@@ -11,3 +11,7 @@ all: generate_users_server generate_users_client
 client: generate_users_client
 
 server: generate_users_server
+
+ci_client: :
+	@echo "Generating users.proto for client"
+	./generate_users_client_ci.sh user ../client/packages/users_repository/lib/src/gen/proto/
