@@ -1,7 +1,13 @@
 package api
 
-type RidesService struct{}
+import "github.com/wzslr321/road_runner/server/rides/src/storage"
+
+type RidesService struct {
+	db storage.Database
+}
 
 func NewRidesService() Service {
-	return &RidesService{}
+	return &RidesService{
+		db: storage.New(),
+	}
 }
