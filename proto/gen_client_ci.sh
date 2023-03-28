@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# This file also install protobuf to make it possible for CI to generate the code
+
 readonly proto_file=$1
 readonly dart_gen_path=$2
 
