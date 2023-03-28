@@ -20,7 +20,7 @@ server: generate_users_server
 
 ci_client:
 	@echo "Generating users.proto for client"
-	./gen_client_ci.sh user ../client/packages/users_repository/lib/src/gen/proto/
+	./gen_client_ci.sh users ../client/packages/users_repository/lib/src/gen/proto/
 
 # rides ms
 
