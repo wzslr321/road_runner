@@ -1,5 +1,5 @@
 build:
-	@go build -o bin/main ./...
+	@go build -o bin/ ./...
 
 run: build
 	./bin/main
