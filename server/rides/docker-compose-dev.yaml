@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  cockroachdb:
+    image: cockroachdb/cockroach:v22.1.17
+    command: start-single-node --insecure
+    ports:
+      - '26257:26257'
+      - '8080:8080'
+    volumes:
+      - "${PWD}/cockroach-data/:/cockroach/cockroach-data"
+    networks:
+      - rides_network
+  rides:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    ports:
+      - '192.168.0.100:50052:50052'
+    volumes:
+      - ./src:/server/rides
+    networks:
+      - rides_network
+
+networks:
+  rides_network:
+    driver: bridge
