@@ -5,7 +5,7 @@ import 'package:grpc/grpc.dart';
 import '../domain/core/typedefs.dart';
 import '../domain/users/call_failure.dart';
 import '../domain/users/users_repository_i.dart';
-import '../gen/proto/user.pbgrpc.dart';
+import '../gen/proto/users.pbgrpc.dart';
 
 class UsersRepository implements UsersRepositoryI {
   @override
