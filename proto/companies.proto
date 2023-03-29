@@ -4,7 +4,7 @@ package rides;
 
 option go_package = "github.com/wzslr321/road_runner/server/companies/src";
 
-service Company {
+service Companies {
   rpc InviteDriver(InviteDriverRequest) returns (InviteDriverResponse) {}
   rpc GetInfo(GetInfoRequest) returns (GetInfoResponse) {}
   rpc UpdateInfo(UpdateInfoRequest) returns (UpdateInfoResponse) {}

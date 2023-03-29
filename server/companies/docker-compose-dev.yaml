@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  rides:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    ports:
+      - '192.168.0.100:50053:50053'
+    volumes:
+      - ./src:/server/companies
+    networks:
+      - companies_network
+
+networks:
+  companies_network:
+    driver: bridge
