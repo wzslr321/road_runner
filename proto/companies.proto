@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package rides;
+
+option go_package = "github.com/wzslr321/road_runner/server/companies/src";
+
+service Company {
+  rpc InviteDriver(InviteDriverRequest) returns (InviteDriverResponse) {}
+  rpc GetInfo(GetInfoRequest) returns (GetInfoResponse) {}
+  rpc UpdateInfo(UpdateInfoRequest) returns (UpdateInfoResponse) {}
+  rpc RegisterCompany(RegisterCompanyRequest) returns (RegisterCompanyResponse) {}
+  // AddDriver call is not needed, because it will happen after email acceptation 
+  rpc GetDrivers(GetDriversRequest) returns (GetDriversResponse) {}
+  rpc RemoveDriver(RemoveDriverRequest) returns (RemoveDriverResponse) {}
+}
+
+message InviteDriverRequest {
+  string driver_id = 1;
+  string company_id = 2;
+}
+
+message InviteDriverResponse {
+  int32 code = 1;
+  string message = 2;
+}
+
+message GetInfoRequest{
+  string company_id = 1;
+}
+
+message GetInfoResponse{
+  int32 code = 1;
+  string message = 2;
+  string company_id = 3;
+  string company_name = 4;
+  int32 price_per_mile = 5;
+}
+
+message UpdateInfoRequest {
+  string company_id = 1;
+  string company_name = 2;
+  int32  price_per_mile = 3;
+}
+
+message UpdateInfoResponse {
+  int32 code = 1;
+  string message = 2;
+}
+
+message RegisterCompanyRequest {
+  string company_name = 1;
+  int32 price_per_mile = 2;
+}
+
+message RegisterCompanyResponse {
+  int32 code = 1;
+  string message = 2;
+  string company_id = 3;
+}
+
+message GetDriversRequest{
+  string company_id = 1; 
+}
+
+message GetDriversResponse {
+  int32 code = 1;
+  string message = 2;
+  repeated string drivers_ids = 3;
+}
+
+message RemoveDriverRequest {
+  string driver_id = 1;
+  string company_id = 2;
+}
+
+message RemoveDriverResponse {
+  int32 code = 1;
+  string message = 2;
+}
+
+
