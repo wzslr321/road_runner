@@ -1,6 +1,6 @@
 FROM golang:1.20.1-alpine
 
-WORKDIR /server/rides
+WORKDIR /server/companies
 
 COPY src/go.mod ./
 COPY src/go.sum ./

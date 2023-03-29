@@ -25,11 +25,14 @@ jobs:
           flutter pub global activate very_good_cli
           very_good --analytics false
           very_good packages get --recursive
-      - name: Generate code
-        run: flutter pub run build_runner build --delete-conflicting-outputs && flutter gen-l10n
+      - name: Generate code users_repository
+        run: flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
+        working-directory: client/packages/users_repository
+      - name: Generate code client
+        run: flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs && flutter gen-l10n
         working-directory: client
       - name: Generate proto
-        run: make client
+        run: make ci_client
         working-directory: proto
 
       - name: ✨ Check Formatting
